@@ -21,17 +21,16 @@ const LoginForm = () => {
       const res = await signIn("credentials", {
         email,
         password,
-        redirect: false,
+        redirect: true,
+        callbackUrl: "/dashboard",
       });
+      console.log(res);
+      if (res?.error) {
+        console.log(res);
 
-      if (res.error) {
         setError("Invalid Credentials");
         return;
       }
-
-      console.log(res);
-
-      router.replace("dashboard");
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +44,10 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input name="email" type="email" placeholder="email" />
           <input name="password" type="password" placeholder="password" />
-          <button type="submit" className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">
+          <button
+            type="submit"
+            className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2"
+          >
             Login
           </button>
           {error && (
