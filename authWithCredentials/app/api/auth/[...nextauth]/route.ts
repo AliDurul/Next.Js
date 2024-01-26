@@ -1,5 +1,7 @@
+
 import nextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 
 const handler = nextAuth({
     providers: [CredentialsProvider({
@@ -29,24 +31,18 @@ const handler = nextAuth({
 
         }
     })],
-    // callbacks: {
-    //     async session({ session, token, user }) {
-    //         console.log('session/session' + session);
-    //         console.log('session/token' + token,);
-    //         console.log('session/user' + user);
+    callbacks: {
+        async jwt({ token, user}) {
+            let decoded
+            if (typeof token.access === 'string') decoded = jwtDecode < JwtPayload > (token.access);
 
-    //         return session
-    //     },
-    //     async jwt({ token, user, account, profile }) {
-    //         console.log('jwt/token' + token,);
-    //         console.log('jwt/user' + user);
-    //         console.log('jwt/account' + account,);
-    //         console.log('jwt/profile' + profile);
-
-
-    //         return token
-    //     }
-    // },
+            return { ...token, ...user, ...decoded }
+        },
+        async session({ session, token, user }) {
+            session.user = token
+            return session
+        },
+    },
     pages: { signIn: '/' },
     secret: process.env.NEXTAUTH_SECRET,
     session: { strategy: 'jwt' },
