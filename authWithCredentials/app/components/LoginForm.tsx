@@ -13,7 +13,6 @@ const LoginForm = () => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
@@ -21,18 +20,17 @@ const LoginForm = () => {
       const res = await signIn("credentials", {
         email,
         password,
-        redirect: true,
-        callbackUrl: "/dashboard",
+        redirect: false,
       });
-      console.log(res);
-      if (res?.error) {
-        console.log(res);
-
-        setError("Invalid Credentials");
-        return;
-      }
-    } catch (error) {
+      if (res?.ok) {
+        router.push("/dashboard");
+      }else(
+        setError("invalid credentials")
+      )
+    } catch (error: any) {
       console.log(error);
+
+      setError(error?.message);
     }
   };
 
