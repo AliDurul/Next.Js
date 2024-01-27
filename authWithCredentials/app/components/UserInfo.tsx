@@ -5,12 +5,14 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function UserInfo() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
   const [materials, setMaterials] = useState([]);
-
+  console.log(session);
   useEffect(() => {
-    if (!session || !session.user || !session.user.access) return;
+    console.log(status);
 
+    if (!session || !session.user || !session.user.access) return;
     try {
       (async () => {
         const res = await fetch("http://127.0.0.1:8000/materials/", {
@@ -21,8 +23,6 @@ export default function UserInfo() {
         });
 
         const data = await res.json();
-        console.log(data);
-        console.log(session);
 
         if (!res.ok) {
           console.log(data.message);
@@ -34,6 +34,17 @@ export default function UserInfo() {
       console.log(error.message);
     }
   }, [session]);
+
+  if (status === "loading") {
+    return (
+      <div className="grid place-items-center h-screen">
+        <div className="shadow-lg p-8 bg-zince-300/10 flex flex-col gap-2 my-6">
+          Loading..
+        </div>
+      </div>
+    );
+  }
+
   console.log(materials);
 
   return (

@@ -15,21 +15,21 @@ const LoginForm = () => {
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-
     try {
       const res = await signIn("credentials", {
         email,
         password,
         redirect: false,
       });
+
       if (res?.ok) {
         router.push("/dashboard");
-      }else(
-        setError("invalid credentials")
-      )
+      } else {
+        console.error("Error Response:");
+        setError("Invalid credentials or server error");
+      }
     } catch (error: any) {
       console.log(error);
-
       setError(error?.message);
     }
   };

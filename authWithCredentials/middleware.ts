@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// export {default} from 'next-auth/middleware'
+export { default } from 'next-auth/middleware'
 
 
-export function middleware(req:NextRequest){
-     console.log('lee');
+// export function middleware(req: NextRequest) {
 
-     return NextResponse.next()
-}
+//      if (req.nextUrl.pathname.startsWith('/dashboard')) {
+//           console.log('lee');
 
-export const config = {matcher:['/dashboard']}
+//      }
+
+//      return NextResponse.next()
+// }
+
+export const config = { matcher: ['/dashboard'] }

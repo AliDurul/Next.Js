@@ -10,7 +10,6 @@ declare module "next-auth" {
       email: string;
       emailToken: string;
       firstName: string;
-
       id: number;
       isActive: Boolean;
       isVerified: Boolean;
@@ -22,4 +21,12 @@ declare module "next-auth" {
       updatedAt: string;
     };
   }
+
+  interface User {
+    access: string,
+    refresh: string
+  }
+
+
+
 }
