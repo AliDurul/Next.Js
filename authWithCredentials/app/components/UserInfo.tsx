@@ -2,11 +2,39 @@
 
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export default function UserInfo() {
   const { data: session } = useSession();
+  const [materials, setMaterials] = useState([]);
 
-  console.log(session);
+  useEffect(() => {
+    if (!session || !session.user || !session.user.access) return;
+
+    try {
+      (async () => {
+        const res = await fetch("http://127.0.0.1:8000/materials/", {
+          method: "Get",
+          headers: {
+            authorization: `Bearer ${session?.user?.access}`,
+          },
+        });
+
+        const data = await res.json();
+        console.log(data);
+        console.log(session);
+
+        if (!res.ok) {
+          console.log(data.message);
+          return;
+        }
+        setMaterials(data.rows);
+      })();
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  }, [session]);
+  console.log(materials);
 
   return (
     <div className="grid place-items-center h-screen">
