@@ -21,12 +21,11 @@ const LoginForm = () => {
         password,
         redirect: false,
       });
-
       if (res?.ok) {
         router.push("/dashboard");
       } else {
-        console.error("Error Response:");
-        setError("Invalid credentials or server error");
+        console.error("Error Response:", res?.error);
+        setError(res?.error || "Invalid credentials or server error");
       }
     } catch (error: any) {
       console.log(error);
@@ -38,6 +37,7 @@ const LoginForm = () => {
     <div className="grid place-items-center h-screen">
       <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400">
         <h1 className="text-xl font-bold my-4">Login</h1>
+        <h1 className="text-xl font-bold my-4">18Mart2020.</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input name="email" type="email" placeholder="email" />

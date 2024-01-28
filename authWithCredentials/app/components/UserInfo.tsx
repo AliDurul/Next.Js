@@ -10,7 +10,7 @@ export default function UserInfo() {
   const [materials, setMaterials] = useState([]);
   console.log(session);
   useEffect(() => {
-    console.log(status);
+    // console.log(status);
 
     if (!session || !session.user || !session.user.access) return;
     try {
@@ -45,7 +45,7 @@ export default function UserInfo() {
     );
   }
 
-  console.log(materials);
+  // console.log(materials);
 
   return (
     <div className="grid place-items-center h-screen">
