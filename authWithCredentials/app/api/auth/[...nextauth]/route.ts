@@ -1,9 +1,9 @@
-import nextAuth from "next-auth";
+import nextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
-const handler = nextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -32,64 +32,29 @@ const handler = nextAuth({
   ],
 
   callbacks: {
-/*     async signIn({ user }) {
-      cookies().set({
-        name: "access-token",
-        value: user?.access,
-        httpOnly: true,
-        path: "/",
-        maxAge: 5 * 60,
-      });
-
-      cookies().set({
-        name: "refresh-token",
-        value: user?.refresh,
-        httpOnly: true,
-        path: "/",
-        maxAge: 24 * 60 * 60,
-      });
-
-      return true;
-    }, */
-
     async jwt({ token, user }) {
-      interface UserInfo extends JwtPayload {
-        id: number;
-        firstName: string;
-        lastName: string;
-        nrcNo: string;
-        phoneNO: string;
-        address: string;
-        role: number;
-        email: string;
-        isActive: boolean;
-        isVerified: boolean;
-        emailToken: string;
-        createdAt: string;
-        updatedAt: string;
-        deletedAt: string | null;
-        iat: number;
-        exp: number;
+      if (user) {
+        token.access = user?.access;
+        token.refresh = user?.refresh;
+        token.userInfo = jwtDecode<JwtPayload>(user?.access);
       }
 
-      let decoded;
-      if (typeof token.access === "string")
-        decoded = jwtDecode<UserInfo>(token.access);
-
-      return { ...token, ...user, ...decoded };
+      return token;
     },
 
     async session({ session, token }) {
-      const { access, refresh, ...userInfo } = token as any;
+      const { userInfo, refresh, access } = token as any;
       session.user = userInfo;
       session.accessToken = access;
       session.refreshToken = refresh;
       return session;
     },
   },
-  pages: { signIn: "/" },
+  pages: { signIn: "/", signOut: "/" },
   secret: process.env.NEXTAUTH_SECRET,
-  session: { strategy: "jwt", maxAge: 1 * 60},
-});
+  session: { strategy: "jwt", maxAge: 24 * 60 * 60 },
+};
+
+const handler = nextAuth(authOptions);
 
 export { handler as GET, handler as POST };

@@ -1,16 +1,27 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+import { withAuth } from "next-auth/middleware";
+import type { NextRequest } from "next/server";
+import type { JWT } from "next-auth/jwt";
 
-export { default } from 'next-auth/middleware'
+export default withAuth(
+  function middleware(req: NextRequest) {
+    const token = req.nextauth.token as JWT | undefined;
 
+    const userInfo = token?.userInfo as { role: number } | undefined;
 
-// export function middleware(req: NextRequest) {
+    if (
+      req.nextUrl.pathname.startsWith("/dashboard/admin") &&
+      userInfo?.role !== 5
+    ) {
+      console.log("if blog calisti");
+      return NextResponse.rewrite(new URL("/denied", req.url));
+    }
+  },
+  {
+    callbacks: {
+      authorized: ({ token }) => !!token,
+    },
+  }
+);
 
-//      if (req.nextUrl.pathname.startsWith('/dashboard')) {
-//           console.log('lee');
-
-//      }
-
-//      return NextResponse.next()
-// }
-
-export const config = { matcher: ['/dashboard'] }
+export const config = { matcher: ["/dashboard/:path*"] };

@@ -1,14 +1,9 @@
-import Link from "next/link";
-import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/MeInfoBtn";
 
 export default function Dashboard() {
   return (
     <main>
-      <UserInfo />
-
-      <Link className="text-sm mt-3 text-right" href={"/"}>
-        go to login? <span className="underline">Login</span>
-      </Link>
+      <h1>THIS IS DASHBOARD MAIN</h1>
     </main>
   );
 }

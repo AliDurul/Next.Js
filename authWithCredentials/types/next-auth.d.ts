@@ -5,7 +5,6 @@ declare module "next-auth" {
     accessToken: string;
     refreshToken: string;
     user: {
-      access: string;
       address: string;
       createdAt: string;
       deletedAt: string | null;
@@ -18,7 +17,6 @@ declare module "next-auth" {
       lastName: string;
       nrcNo: string;
       phoneNO: string;
-      refresh: string;
       role: number;
       updatedAt: string;
     };
@@ -27,5 +25,34 @@ declare module "next-auth" {
   interface User {
     access: string;
     refresh: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+  interface Token {
+    access: string;
+    refresh: string;
+    userInfo: {
+      id: number;
+      firstName: string;
+      lastName: string;
+      nrcNo: string;
+      phoneNO: string;
+      address: string;
+      role: number;
+      email: string;
+      isActive: Boolean;
+      isVerified: Boolean;
+      emailToken: string;
+      createdAt: string;
+      updatedAt: string;
+      deletedAt: string | null;
+      iat: number;
+      exp: number;
+    };
+    iat: number;
+    exp: number;
+    jti: string;
   }
 }
