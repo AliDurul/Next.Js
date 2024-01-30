@@ -22,7 +22,7 @@ const LoginForm = () => {
         redirect: false,
       });
       if (res?.ok) {
-        router.push("/dashboard/admin");
+        router.push("/dashboard");
       } else {
         console.error("Error Response:", res?.error);
         setError(res?.error || "Invalid credentials or server error");

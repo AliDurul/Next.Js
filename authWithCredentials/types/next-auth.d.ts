@@ -1,9 +1,12 @@
+import { JwtPayload } from "jwt-decode";
 import NextAuth from "next-auth";
 
 declare module "next-auth" {
   interface Session {
     accessToken: string;
     refreshToken: string;
+    expireAt: string;
+    error?: string;
     user: {
       address: string;
       createdAt: string;
@@ -29,10 +32,11 @@ declare module "next-auth" {
 }
 
 declare module "next-auth/jwt" {
-  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
-  interface Token {
+  interface JWT {
     access: string;
     refresh: string;
+    expiresAt: number;
+    error?: string;
     userInfo: {
       id: number;
       firstName: string;
@@ -55,4 +59,24 @@ declare module "next-auth/jwt" {
     exp: number;
     jti: string;
   }
+
+}
+
+interface userInfo extends JwtPayload {
+  id: number;
+  firstName: string;
+  lastName: string;
+  nrcNo: string;
+  phoneNO: string;
+  address: string;
+  role: number;
+  email: string;
+  isActive: Boolean;
+  isVerified: Boolean;
+  emailToken: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+  iat: number;
+  exp: number;
 }
