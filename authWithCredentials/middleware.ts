@@ -1,27 +1,37 @@
-import { NextResponse } from "next/server";
-import { withAuth } from "next-auth/middleware";
-import type { NextRequest } from "next/server";
-import type { JWT } from "next-auth/jwt";
 
-export default withAuth(
-  function middleware(req: NextRequest) {
-    const token = req.nextauth.token as JWT | undefined;
+import { auth } from "./auth";
+import {
+  publicRoutes,
+  authRoutes,
+  apiAuthPrefix,
+  DEFAULT_LOGIN_REDIRECT,
+} from "@/routes";
 
-    const userInfo = token?.userInfo as { role: number } | undefined;
+export default auth((req) => {
+  const { nextUrl } = req;
+  const isLoggedIn = !!req.auth;
+  const userInfo = req.auth?.user;
 
-    if (
-      req.nextUrl.pathname.startsWith("/dashboard/admin") &&
-      userInfo?.role !== 5
-    ) {
-      console.log("if blog calisti");
-      return NextResponse.rewrite(new URL("/denied", req.url));
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+
+  if (isApiAuthRoute) return null;
+
+  if (isAuthRoute) {
+    if (isLoggedIn) {
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => !!token,
-    },
+    return null;
   }
-);
 
-export const config = { matcher: ["/dashboard/:path*"] };
+  if (!isLoggedIn && !isPublicRoute) {
+    return Response.redirect(new URL("/", nextUrl));
+  }
+
+  return null;
+});
+
+export const config = {
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+};
