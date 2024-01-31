@@ -3,6 +3,9 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { AuthError } from "next-auth";
+import { login } from "@/actions/login";
 
 const LoginForm = () => {
   const [error, setError] = useState("");
@@ -15,22 +18,20 @@ const LoginForm = () => {
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    try {
-      const res = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
+
+    login({ email, password })
+      .then((data) => {
+        if (data?.error) {
+          setError(data.error);
+        } else {
+          router.push("/dashboard");
+          console.log("Successful login");
+        }
+      })
+      .catch((error) => {
+        setError("An error occurred");
+        console.error(error);
       });
-      if (res?.ok) {
-        router.push("/dashboard");
-      } else {
-        console.error("Error Response:", res?.error);
-        setError(res?.error || "Invalid credentials or server error");
-      }
-    } catch (error: any) {
-      console.log(error);
-      setError(error?.message);
-    }
   };
 
   return (

@@ -1,21 +1,23 @@
 import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { jwtDecode } from "jwt-decode";
 import { userInfo } from "@/types/next-auth";
 import { JWT } from "next-auth/jwt";
-
-
+import authConfig from "@/auth.config";
+import Credentials from "@auth/core/providers/credentials";
+interface CredentialsType {
+  email: string;
+  password: string;
+}
 export const {
   handlers: { GET, POST },
   auth,
   signIn,
-  signOut
+  signOut,
 } = NextAuth({
   providers: [
-    CredentialsProvider({
-      name: "credentials",
+    Credentials({
       credentials: {},
-      authorize: async (credentials) => {
+      async authorize(credentials) {
         if (!credentials) return null;
 
         const { email, password } = credentials as any;
@@ -32,12 +34,12 @@ export const {
         if (res.ok && user) {
           return user;
         } else {
+          // return null
           throw new Error(data.message || "Authentication failed");
         }
       },
     }),
   ],
-
   callbacks: {
     async jwt({ token, user }) {
       if (user) {

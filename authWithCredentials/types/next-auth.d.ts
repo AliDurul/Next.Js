@@ -28,6 +28,7 @@ declare module "next-auth" {
   interface User {
     access: string;
     refresh: string;
+    error?:string
   }
 }
 

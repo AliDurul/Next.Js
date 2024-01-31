@@ -1,35 +1,35 @@
 "use server";
-
+import { AuthError } from "next-auth";
 import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { AuthError } from "next-auth";
-import { Router } from "next/router";
 
-interface LoginValues {
+interface valuesTypes {
   email: string;
   password: string;
 }
 
-export const login = async (values: LoginValues) => {
+export const login = async (values: valuesTypes) => {
   const { email, password } = values;
 
   try {
-    const res = await signIn("credentials", {
+    await signIn("credentials", {
       email,
       password,
-      redirectTo: DEFAULT_LOGIN_REDIRECT,
+      redirect:false,
     });
-    console.log(res);
-  } catch (error) {
+  } catch (error: any) {
     if (error instanceof AuthError) {
-        switch (error.type){
-            case "CredentialsSignin":
-                return {error: "Invalid Credential"}
-            
-        }
-
-      return error?.message || "Invalid credentials or server error";
+      switch (error.type) {
+        case "CredentialsSignin":
+          return { error: "Invalid Credentials !" };
+        case "CallbackRouteError":
+          const errorMessage = error?.cause?.err?.message;
+          return { error: errorMessage };
+        default:
+          return { error: "Something went wrong!" };
+      }
     }
+
     throw error;
   }
 };
