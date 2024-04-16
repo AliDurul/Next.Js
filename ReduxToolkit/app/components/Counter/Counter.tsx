@@ -11,6 +11,8 @@ import {
   selectCount,
   incrementAsync,
   incrementIfOddAsync,
+  decrement,
+  
 } from "@/lib/redux";
 import styles from "./counter.module.css";
 
@@ -25,7 +27,7 @@ export const Counter = () => {
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(counterSlice.actions.decrement())}
+          onClick={() => dispatch(decrement())}
         >
           -
         </button>

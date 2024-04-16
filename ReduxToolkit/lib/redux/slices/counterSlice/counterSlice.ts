@@ -48,3 +48,5 @@ export interface CounterSliceState {
   value: number;
   status: "idle" | "loading" | "failed";
 }
+
+// export const { decrement } = counterSlice.actions;
