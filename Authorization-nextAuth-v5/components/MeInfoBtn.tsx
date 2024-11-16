@@ -8,8 +8,9 @@ import React from "react";
 const MeInfoBtn = () => {
   const { data: session, status } = useSession();
   const [materials, setMaterials] = useState([]);
-console.log(session);
-  /* useEffect(() => {
+
+  console.log(session);
+  useEffect(() => {
     if (!session || !session.user || !session.accessToken) return;
 
     if (session?.error === "RefreshAccessTokenError") {
@@ -36,7 +37,7 @@ console.log(session);
     } catch (error: any) {
       console.log(error.message);
     }
-  }, [session]); */
+  }, [session]);
 
   if (status === "loading") {
     return (
@@ -46,7 +47,7 @@ console.log(session);
     );
   }
 
-  // console.log(materials);
+  console.log(materials);
 
   return (
     <button
