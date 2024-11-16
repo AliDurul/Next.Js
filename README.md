@@ -1,1 +1,1 @@
-### Next.js Trainings
+### Next.js practices
