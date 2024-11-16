@@ -4,10 +4,12 @@ import { Cog6ToothIcon, } from '@heroicons/react/24/outline'
 // import { CalendarIcon, ChartPieIcon, Cog6ToothIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon } from '@heroicons/react/24/outline'
 import { classNames } from '@/lib/helperFuncs'
 import { navigation, teams } from '@/constraint/sidebar'
+import Link from 'next/link'
 
 
 /* Desktop component */
-export default function DesktopSidebar() {
+export default async function DesktopSidebar() {
+
 
     return (
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
@@ -25,7 +27,7 @@ export default function DesktopSidebar() {
                             <ul role="list" className="-mx-2 space-y-1">
                                 {navigation.map((item) => (
                                     <li key={item.name}>
-                                        <a
+                                        <Link
                                             href={item.href}
                                             className={classNames(
                                                 item.current
@@ -36,7 +38,7 @@ export default function DesktopSidebar() {
                                         >
                                             <item.icon aria-hidden="true" className="size-6 shrink-0" />
                                             {item.name}
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -46,7 +48,7 @@ export default function DesktopSidebar() {
                             <ul role="list" className="-mx-2 mt-2 space-y-1">
                                 {teams.map((team) => (
                                     <li key={team.name}>
-                                        <a
+                                        <Link
                                             href={team.href}
                                             className={classNames(
                                                 team.current
@@ -59,19 +61,19 @@ export default function DesktopSidebar() {
                                                 {team.initial}
                                             </span>
                                             <span className="truncate">{team.name}</span>
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
                         </li>
                         <li className="mt-auto">
-                            <a
+                            <Link
                                 href="#"
                                 className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white"
                             >
                                 <Cog6ToothIcon aria-hidden="true" className="size-6 shrink-0" />
                                 Settings
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </nav>

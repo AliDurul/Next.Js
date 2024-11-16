@@ -18,7 +18,7 @@ export default function MobileSidebar() {
                 className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
             />
 
-            <div className="fixed inset-0 flex">
+            <nav className="fixed inset-0 flex">
                 <DialogPanel
                     transition
                     className="relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-[closed]:-translate-x-full"
@@ -98,7 +98,7 @@ export default function MobileSidebar() {
                         </nav>
                     </div>
                 </DialogPanel>
-            </div>
+            </nav>
         </Dialog>
     )
 }

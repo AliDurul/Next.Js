@@ -1,16 +1,11 @@
 
 import DesktopSidebar from './DesktopSidebar'
 import MobileSidebar from './MobileSidebar'
-import Navbar from './Navbar'
+// import Navbar from './Navbar'
 
-
-
-
-
-
-export default function DefaultLayout() {
+export default function DefaultLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
     return (
-        <div>
+        <>
             {/* Mobile sidebar */}
             <MobileSidebar />
 
@@ -19,15 +14,15 @@ export default function DefaultLayout() {
 
             <div className="lg:pl-72">
                 {/* Sticky Navbar */}
-                <Navbar />
+                {/* <Navbar /> */}
 
                 {/* Main Content */}
                 <main className="py-10">
                     <div className="px-4 sm:px-6 lg:px-8">
-                        <h1>hi there</h1>
+                        {children}
                     </div>
                 </main>
             </div>
-        </div>
+        </>
     )
 }

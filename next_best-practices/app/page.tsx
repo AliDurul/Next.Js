@@ -1,7 +1,11 @@
-import DefaultLayout from "@/components/layout/DefaultLayout";
 
-export default function Home() {
+export const revalidate = 20;
+
+export default async function Home() {
   return (
-    <DefaultLayout />
+    <>
+      <h1>Caching</h1>
+      <p>{Math.random()}</p>
+    </>
   );
 }
