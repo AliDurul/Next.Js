@@ -1,5 +1,5 @@
 "use client";
-import { signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,10 @@ const MeInfoBtn = () => {
 console.log(session);
   /* useEffect(() => {
     if (!session || !session.user || !session.accessToken) return;
+
+    if (session?.error === "RefreshAccessTokenError") {
+      signIn(); 
+    }
 
     try {
       (async () => {
