@@ -1,6 +1,13 @@
+<<<<<<< HEAD
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import FetchData from "@/app/components/FetchData";
+import MeInfoBtn from "@/app/components/MeInfoBtn";
+import { getServerSession } from "next-auth";
+=======
 import MeInfoBtn from "@/components/MeInfoBtn";
 import { auth } from "@/auth"
 
+>>>>>>> main
 
 export default async function UserInfo() {
   const session = await auth()
@@ -19,6 +26,7 @@ export default async function UserInfo() {
         </div>
         <MeInfoBtn />
       </div>
+      <FetchData/>
     </div>
   );
 }
