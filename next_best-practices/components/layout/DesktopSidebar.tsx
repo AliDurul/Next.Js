@@ -5,10 +5,16 @@ import { Cog6ToothIcon, } from '@heroicons/react/24/outline'
 import { classNames } from '@/lib/helperFuncs'
 import { navigation, teams } from '@/constraint/sidebar'
 import Link from 'next/link'
+import { headers } from 'next/headers'
 
 
 /* Desktop component */
 export default async function DesktopSidebar() {
+
+    // const headersList = await headers()
+
+
+
 
 
     return (
