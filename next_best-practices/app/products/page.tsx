@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid'
 import Search from './_components/Search'
 import { getProducts } from '@/actions/productsActions'
 import Products from './_components/Products'
+import Trigger from './_components/Trigger'
 
 
 
@@ -61,7 +62,10 @@ export default async function ProductsPage({ params, searchParams }: MovieParams
                     </div>
                 </div>
 
-                <Products products={productsInfo.products} />
+                <section>
+                    <Products products={productsInfo.products} />
+                    <Trigger limit={limit} />
+                </section>
 
                 {/* <Suspense fallback={<Skeleton />}>
                     <Await promise={promise}>

@@ -1,4 +1,3 @@
-import getBase64 from '@/actions/getBase64';
 import Image from 'next/image';
 import React from 'react'
 
@@ -37,14 +36,12 @@ interface Product {
     thumbnail: string;
 }
 
-
 export default function Products({ products }: { products: Product[] }) {
 
     return (
         <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
             {
-                products.map(async (product) => {
-                    const blurData = await getBase64(product.images[0])
+                products.map((product) => {
                     return (
                         <li key={product.id} className="group relative">
                             <div className="relative">
@@ -53,15 +50,13 @@ export default function Products({ products }: { products: Product[] }) {
                                     height={300}
                                     alt={product.title}
                                     src={product.images[0]}
-                                    className="aspect-[4/3] w-full rounded-lg bg-gray-100 object-cover"
-                                    placeholder='blur'
-                                    blurDataURL={blurData}
+                                    className="aspect-[4/3] w-full rounded-lg border  border-gray-300 p-2 object-cover"
                                 />
                                 <div
                                     aria-hidden="true"
                                     className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100"
                                 >
-                                    <div className="w-full rounded-md bg-zinc-500 px-4 py-2 text-center text-sm font-medium text-slate-300 backdrop-blur backdrop-filter">
+                                    <div className="w-full rounded-md bg-white/50 px-4 py-2 text-center text-sm font-medium text-slate-800 backdrop-blur backdrop-filter">
                                         View Product
                                     </div>
                                 </div>

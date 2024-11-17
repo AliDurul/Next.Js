@@ -6,6 +6,7 @@ import { Dialog, DialogBackdrop, DialogPanel, TransitionChild, } from '@headless
 import { Cog6ToothIcon, XMarkIcon, } from '@heroicons/react/24/outline'
 import { navigation, teams } from '@/constraint/sidebar'
 import { classNames } from '@/lib/helperFuncs'
+import Image from 'next/image'
 
 
 
@@ -34,7 +35,9 @@ export default function MobileSidebar() {
                     {/* Mobile Sidebar component,  */}
                     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
                         <div className="flex h-16 shrink-0 items-center">
-                            <img
+                            <Image
+                                height={32}
+                                width={32}
                                 alt="Your Company"
                                 src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
                                 className="h-8 w-auto"

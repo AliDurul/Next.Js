@@ -23,7 +23,7 @@ const Search = ({ search }: { search?: string }) => {
         if (!query) router.push(`/products`)
         else router.push(`/products?search=${query}`)
 
-    }, [query])
+    }, [query,router])
 
     return (
         <div className='relative rounded-md shadow-sm'>
