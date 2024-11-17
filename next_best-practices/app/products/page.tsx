@@ -22,14 +22,13 @@ export default async function ProductsPage({ params, searchParams }: MovieParams
     const search = (await searchParams).search as string | undefined
 
 
-    // const promise = getMovies({ page, limit, query: search })
-    const productsInfo = await getProducts(page, limit)
+    const productsInfo = await getProducts(page, limit, search)
 
     return (
         <section className='py-24' >
             <div className='container'>
                 <div className='mb-12 flex items-center justify-between gap-x-16'>
-                    <h1 className='text-3xl font-bold'>Movies</h1>
+                    <h1 className='text-3xl font-bold'>Products</h1>
 
                     <div className='grow'>
                         <Search search={search} />

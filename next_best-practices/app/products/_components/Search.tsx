@@ -20,10 +20,14 @@ const Search = ({ search }: { search?: string }) => {
             return
         }
 
-        if (!query) router.push(`/products`)
-        else router.push(`/products?search=${query}`)
+        const params = new URLSearchParams(window.location.search);
+        
+        if (query) params.set('search', query)
+        else params.delete('search');
 
-    }, [query,router])
+        router.push(`/products?${params.toString()}`, { scroll: false });
+
+    }, [query, router])
 
     return (
         <div className='relative rounded-md shadow-sm'>
