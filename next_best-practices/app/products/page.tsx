@@ -34,7 +34,7 @@ export default async function ProductsPage({ params, searchParams }: MovieParams
                         <Search search={search} />
                     </div>
 
-                    <div className='flex space-x-6'>
+                    <div className='flex space-x-6 items-center'>
                         <Link
                             href={{
                                 pathname: '/products',
@@ -54,16 +54,21 @@ export default async function ProductsPage({ params, searchParams }: MovieParams
                                     page: page + 1
                                 }
                             }}
-                            className='rounded border bg-gray-100 px-3 py-1 text-sm text-gray-800'
+                            className={`rounded border bg-gray-100 px-3 py-1 text-sm text-gray-800 ${(productsInfo.skip + productsInfo.limit >= productsInfo.total) && 'pointer-events-none opacity-50'}`}
                         >
                             Next
                         </Link>
+                        <span className='text-sm text-gray-800'>
+                            Page {page} of {Math.ceil(productsInfo.total / productsInfo.limit)}
+                        </span>
                     </div>
                 </div>
 
                 <section>
                     <Products products={productsInfo.products} />
-                    <Trigger limit={limit} />
+                    {
+                        productsInfo.products.length >= 10 && <Trigger limit={limit} />
+                    }
                 </section>
 
                 {/* <Suspense fallback={<Skeleton />}>
