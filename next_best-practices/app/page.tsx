@@ -1,14 +1,26 @@
+import Divider from "@/components/Divider"
+import { unstable_noStore as noStore } from "next/cache";
+import { cookies } from "next/headers";
+import { Suspense } from "react";
 
-export const revalidate = 20;
 
-export default async function Home() {
+async function Post() {
+  // noStore() // skips cache
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=1');
+  const posts = await response.json();
 
+  return <h1>{posts[0].title}</h1>
+}
 
-  
+export default async function MainPage() {
+  // cookies(); // Headers() noStore()
   return (
     <>
-      <h1>Caching</h1>
-      {/* <p>{Math.random()}</p> */}
+      <Divider title="Caching" />
+      <p>{Date.now()}</p>
+      <Suspense fallback={<h1>loading...</h1>}>
+        <Post />
+      </Suspense>
     </>
   );
 }

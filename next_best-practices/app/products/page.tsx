@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import Link from 'next/link'
 import React, { Suspense } from 'react'
 import { v4 as uuid } from 'uuid'
