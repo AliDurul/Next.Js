@@ -1,12 +1,11 @@
-import { CalendarIcon, ChartPieIcon,  DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon } from '@heroicons/react/24/outline'
 
 export const navigation = [
-    { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
-    { name: 'Images', href: '/images', icon: UsersIcon, current: false },
-    { name: 'Products', href: '/products', icon: FolderIcon, current: false },
-    { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-    { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-    { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+    { name: 'Dashboard', href: '/', current: false },
+    { name: 'Images', href: '/images', current: false },
+    { name: 'Products', href: '/products', current: false },
+    { name: 'Paralle & Sequential Data Fetching', href: '/parallel-fetch', current: false },
+    { name: 'Documents', href: '#', current: false },
+    { name: 'Reports', href: '#', current: false },
 ]
 export const teams = [
     { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },

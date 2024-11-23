@@ -3,7 +3,7 @@ import React from 'react'
 import { Cog6ToothIcon, } from '@heroicons/react/24/outline'
 // import { CalendarIcon, ChartPieIcon, Cog6ToothIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon } from '@heroicons/react/24/outline'
 import { classNames } from '@/lib/helperFuncs'
-import { navigation, teams } from '@/constraint/sidebar'
+import { navigation } from '@/constraint/sidebar'
 import Link from 'next/link'
 import Image from 'next/image'
 // import { headers } from 'next/headers'
@@ -13,10 +13,6 @@ import Image from 'next/image'
 export default async function DesktopSidebar() {
 
     // const headersList = await headers()
-
-
-
-
 
     return (
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
@@ -45,36 +41,13 @@ export default async function DesktopSidebar() {
                                                 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
                                             )}
                                         >
-                                            <item.icon aria-hidden="true" className="size-6 shrink-0" />
                                             {item.name}
                                         </Link>
                                     </li>
                                 ))}
                             </ul>
                         </li>
-                        <li>
-                            <div className="text-xs/6 font-semibold text-gray-400">Your teams</div>
-                            <ul role="list" className="-mx-2 mt-2 space-y-1">
-                                {teams.map((team) => (
-                                    <li key={team.name}>
-                                        <Link
-                                            href={team.href}
-                                            className={classNames(
-                                                team.current
-                                                    ? 'bg-gray-800 text-white'
-                                                    : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
-                                            )}
-                                        >
-                                            <span className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
-                                                {team.initial}
-                                            </span>
-                                            <span className="truncate">{team.name}</span>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </li>
+                      
                         <li className="mt-auto">
                             <Link
                                 href="#"
