@@ -1,6 +1,9 @@
 "use client";
 
 import { createTodo } from "@/actions/use-form-state";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -12,9 +15,9 @@ function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <button type="submit" aria-disabled={pending}>
+    <Button type="submit" aria-disabled={pending}>
       Add
-    </button>
+    </Button>
   );
 }
 
@@ -24,8 +27,7 @@ export function AddForm() {
 
   return (
     <form action={formAction} className="flex gap-3 items-center">
-      <label htmlFor="todo">Enter Task</label>
-      <input type="text" id="todo" name="todo" className="text-red-600" required />
+      <Input type="text" id="todo" name="todo" className="text-red-600" required  placeholder="Enter new Todo"/>
       <SubmitButton />
       <p aria-live="polite" className="sr-only" role="status">
         {state?.message}

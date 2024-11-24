@@ -1,6 +1,7 @@
 "use client";
 
 import { deleteTodo } from "@/actions/use-form-state";
+import { Button } from "@/components/ui/button";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -12,9 +13,9 @@ function DeleteButton() {
     const { pending } = useFormStatus();
 
     return (
-        <button type="submit" className="border" aria-disabled={pending}>
+        <Button variant={"outline"} type="submit" className="border" aria-disabled={pending}>
             Delete
-        </button>
+        </Button>
     );
 }
 

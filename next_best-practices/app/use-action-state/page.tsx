@@ -11,12 +11,11 @@ async function getTodos() {
 export default async function UseFormState() {
     const todos = await getTodos()
     return (
-        <main>
-            <h1 className="">Todos</h1>
+        <main className='w-10/12 mx-auto'>
             <AddForm />
-            <ul className='mt-4'>
+            <ul role='list' className='divide-y divide-gray-200 mt-5'>
                 {todos.map((todo: any) => (
-                    <li key={todo.id} className='flex gap-5'>
+                    <li key={todo.id} className='py-4 flex justify-between'>
                         {todo.todo}
                         <DeleteForm id={todo.id} todo={todo.text} />
                     </li>
