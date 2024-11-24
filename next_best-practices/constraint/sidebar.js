@@ -5,7 +5,7 @@ export const navigation = [
     { name: 'Products', href: '/products', current: false },
     { name: 'Paralle & Sequential Data Fetching', href: '/parallel-fetch', current: false },
     { name: 'Revalidate with tag', href: '/revalidate', current: false },
-    { name: 'Reports', href: '#', current: false },
+    { name: 'Use Action State', href: '/use-action-state', current: false },
 ]
 export const teams = [
     { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
