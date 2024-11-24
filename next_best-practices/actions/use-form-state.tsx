@@ -18,8 +18,6 @@ export async function createTodo(prevState: { message: string; }, formData: Form
 
         const data = await response.json();
 
-        console.log(data);
-
         revalidateTag("todos");
         return { message: `Added todo ${data.todo}` };
     } catch (e) {

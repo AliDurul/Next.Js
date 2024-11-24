@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Toaster } from 'react-hot-toast';
 import "./globals.css";
 import DefaultLayout from "@/components/layout/DefaultLayout";
 
@@ -25,6 +26,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
         <DefaultLayout>
           {children}
+          <Toaster
+            position="top-right"
+          />
         </DefaultLayout>
       </body>
     </html>

@@ -13,7 +13,7 @@ function DeleteButton() {
     const { pending } = useFormStatus();
 
     return (
-        <Button variant={"outline"} type="submit" className="border" aria-disabled={pending}>
+        <Button variant={"outline"} type="submit" className="border" disabled={pending}>
             Delete
         </Button>
     );
