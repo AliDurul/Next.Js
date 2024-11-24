@@ -4,7 +4,7 @@ export const navigation = [
     { name: 'Images', href: '/images', current: false },
     { name: 'Products', href: '/products', current: false },
     { name: 'Paralle & Sequential Data Fetching', href: '/parallel-fetch', current: false },
-    { name: 'Documents', href: '#', current: false },
+    { name: 'Revalidate with tag', href: '/revalidate', current: false },
     { name: 'Reports', href: '#', current: false },
 ]
 export const teams = [
